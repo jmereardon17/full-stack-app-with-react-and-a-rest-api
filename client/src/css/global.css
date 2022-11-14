@@ -12,6 +12,7 @@ h2 {
   font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 1rem;
+  color: #47395e;
 }
 p {
   font-weight: 300;
@@ -20,8 +21,11 @@ p {
   hyphens: auto;
 }
 a {
-  color: #939;
+  color: #9069e7;
   text-decoration: none;
+}
+:focus {
+  outline: 0;
 }
 .wrap {
   max-width: 1250px;
@@ -29,8 +33,8 @@ a {
   padding: 0 1rem;
 }
 header {
-  background: #57496e;
-  color: #fff;
+  background: #f5edff;
+  color: #3e0075;
   padding: 1rem 0;
   margin-bottom: 2rem;
 }
@@ -41,18 +45,14 @@ header {
 }
 .header--logo a {
   font-size: 1.25rem;
-  color: #fff;
+  font-weight: 700;
 }
 header li {
   font-size: 0.8rem;
 }
-header nav a {
-  color: #dbd;
-}
 header nav a:hover {
-  color: #fff;
+  color: #8039df;
 }
-
 .header--signedin li {
   text-align: right;
   line-height: 1.25;
@@ -62,11 +62,15 @@ header nav a:hover {
   margin-left: 0.5rem;
 }
 .course--module {
-  background: #7c689b;
+  background-color: #55616c;
   border-radius: 0.5rem;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
   display: block;
+  transition: background-color 0.2s;
+}
+.course--module:hover {
+  background-color: #9069e7;
 }
 .course--label {
   color: #fff;
@@ -80,16 +84,16 @@ header nav a:hover {
   font-size: 1.25rem;
 }
 .course--add--module {
-  background: #ddd9e4;
-  color: #57496e;
-  font-weight: 300;
+  background: #8039df;
+  color: #fff;
+  font-weight: 600;
   font-size: 1.25rem;
 }
 .course--add--title .add {
   width: 20px;
   height: auto;
   margin-right: 5px;
-  fill: #57496e;
+  fill: #fff;
 }
 .course--detail--title {
   padding-bottom: 0.25rem;
@@ -104,7 +108,7 @@ header nav a:hover {
   font-size: 2rem;
   margin-bottom: 0.5rem;
   font-weight: 700;
-  color: #47395e;
+  color: #8039df;
 }
 .course--detail--list {
   font-weight: 300;
@@ -117,10 +121,11 @@ header nav a:hover {
   margin: -2rem 0 2rem;
 }
 .validation--errors {
-  background: #e9e5f0;
+  box-shadow: 0 2px 10px rgb(128 57 223 / 16%);
   padding: 1rem;
   border-radius: 0.5rem;
   margin-bottom: 2.5rem;
+  color: #ed0b70;
 }
 .validation--errors h3 {
   color: #800;
@@ -133,6 +138,7 @@ header nav a:hover {
   line-height: 1.25;
 }
 .validation--errors li {
+  font-weight: 400;
   margin-bottom: 0.5rem;
 }
 .validation--errors li:last-child {
@@ -156,9 +162,10 @@ input,
 textarea {
   display: block;
   width: 100%;
-  color: #332a40;
+  background: #f5edff;
+  color: #3e0075;
   border-radius: 0.5rem;
-  border: 1px solid #8c789b;
+  border: none;
   padding: 0.5rem;
   margin-bottom: 1rem;
   font-family: 'Work Sans', sans-serif;
@@ -168,7 +175,7 @@ textarea {
   min-height: 300px;
 }
 .button {
-  background: #7c689b;
+  background: #8039df;
   color: #fff;
   font-size: 1rem;
   padding: 0.75rem 1.5rem;
@@ -177,7 +184,7 @@ textarea {
   display: block;
   width: 210px;
   text-align: center;
-  border-radius: 0.5rem;
+  border-radius: 20px;
   font-weight: bold;
   transition: background 0.2s;
 }
@@ -185,27 +192,17 @@ textarea {
   margin-bottom: 0;
 }
 .button:not(.button-secondary):hover {
-  background: #63537d;
+  background: #9069e7;
   cursor: pointer;
 }
 .button-secondary {
-  color: #7c689b;
-  background: none;
-  box-shadow: 0 0 0 2px #7c689b inset;
-  transition: box-shadow 0.2s, color 0.2s;
+  color: #fff;
+  background: #ed0b70;
+  transition: 0.2s;
 }
 .button-secondary:hover {
-  color: #63537d;
-  box-shadow: 0 0 0 2px #63537d inset;
+  background: #e94b92;
   cursor: pointer;
-}
-input:focus,
-button:focus,
-.button:focus,
-textarea:focus {
-  border: none;
-  border-radius: 0;
-  outline: 2px solid #332a40;
 }
 
 @media screen and (min-width: 600px) {
