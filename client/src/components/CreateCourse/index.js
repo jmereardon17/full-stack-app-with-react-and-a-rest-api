@@ -68,7 +68,7 @@ const CreateCourse = ({ context }) => {
           <button
             className="button button-secondary"
             onClick={e => {
-              e.preventDefault(); // may not need - getting warning for form not connected
+              e.preventDefault();
               navigate('/');
             }}
           >
