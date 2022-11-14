@@ -11,12 +11,16 @@ const UpdateCourse = ({ context }) => {
   useEffect(() => {
     context.data
       .getCourse(id)
-      .then(course => (course ? setCourse(course) : navigate('/notfound')))
+      .then(course => {
+        if (!course) return navigate('/notfound');
+        // if course doesn't belong to the user
+        course.userId !== currentUser?.id ? navigate('/forbidden') : setCourse(course);
+      })
       .catch(err => {
         console.error(`Error getting course with id: ${id} - `, err);
         navigate('/error');
       });
-  }, [id]);
+  }, [id, context.data, currentUser.id, navigate]);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -37,7 +41,7 @@ const UpdateCourse = ({ context }) => {
         if (res.status === 400) return res.json();
         if (res.status === 403) navigate('/forbidden');
       })
-      .then(setErrors)
+      .then(setErrors) // set errors from response in state
       .catch(err => {
         console.error(`Error updating course with id: ${id} - `, err);
         navigate('/error');
@@ -50,7 +54,7 @@ const UpdateCourse = ({ context }) => {
         <div className="wrap">
           <h2>Update Course</h2>
 
-          {errors && (
+          {errors && ( // if validation errors render
             <div className="validation--errors">
               <h3>Validation Errors</h3>
               <ul>

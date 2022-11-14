@@ -12,8 +12,8 @@ const CourseDetail = ({ context }) => {
     context.data
       .deleteCourse(course.id, currentUser)
       .then(res => {
-        if (res.ok) navigate('/');
-        if (res.status === 403) navigate('/forbidden');
+        if (res.ok) navigate('/'); // if successfull redirect to root
+        if (res.status === 403) navigate('/forbidden'); // redirect to forbidden since this is the only other outcome
       })
       .catch(err => {
         console.error(`Error deleting course with id: ${id} - `, err);
@@ -24,10 +24,10 @@ const CourseDetail = ({ context }) => {
   useEffect(() => {
     context.data
       .getCourse(id)
-      .then(course => (course ? setCourse(course) : navigate('/notfound')))
+      .then(course => (course ? setCourse(course) : navigate('/notfound'))) // if course exists set state otherwise redirect to 404
       .catch(err => {
-        navigate('/error');
         console.error(`Error getting course with id: ${id} - `, err);
+        navigate('/error');
       });
   }, [id, context.data, navigate]);
 
@@ -87,6 +87,8 @@ const CourseDetail = ({ context }) => {
       </main>
     );
   }
+
+  return;
 };
 
 export default CourseDetail;

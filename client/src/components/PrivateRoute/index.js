@@ -10,6 +10,7 @@ const PrivateRoute = ({ children }) => {
       {context => {
         if (!context.currentUser)
           return <Navigate to="/sign-in" state={{ from: location }} replace />;
+
         return children ? children : <Outlet />;
       }}
     </Consumer>

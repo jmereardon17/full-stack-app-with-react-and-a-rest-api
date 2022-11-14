@@ -10,13 +10,13 @@ const Courses = ({ context }) => {
 
     context.data
       .getCourses()
-      .then(getCourses && setCourses)
+      .then(getCourses && setCourses) // only set state if needed
       .catch(err => {
         console.error('Error getting courses - ', err);
         navigate('/error');
       });
 
-    return () => (getCourses = true);
+    return () => (getCourses = true); // clean up for useEffect
   }, [context.data, navigate]);
 
   return (

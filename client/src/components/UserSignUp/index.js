@@ -19,16 +19,15 @@ const UserSignUp = ({ context }) => {
       .createUser(user)
       .then(errors => {
         if (errors) {
-          setErrors(errors);
+          setErrors(errors); // store errors in state and display on re-render
         } else {
           context.actions
             .signIn(user.emailAddress, user.password)
-            .then(user => (user ? navigate('/') : setErrors(['Sign-in was unsuccessful'])))
+            .then(user => (user ? navigate('/') : setErrors(['Sign-in was unsuccessful']))) // if successful navigate back to root otherwise display invalid sign in error on re-render
             .catch(err => {
               console.error('Error occurred signing in: ', err);
               navigate('/error');
             });
-          navigate('/');
         }
       })
       .catch(err => {
@@ -41,7 +40,7 @@ const UserSignUp = ({ context }) => {
     <div className="form--centered">
       <h2>Sign Up</h2>
 
-      {errors && (
+      {errors && ( // if validation errors render
         <div className="validation--errors">
           <h3>Validation Errors</h3>
           <ul>

@@ -11,6 +11,7 @@ export default class Data {
 
     if (body) options.body = JSON.stringify(body);
 
+    // if authentication is required
     if (authenticate) {
       const encodedCredentials = btoa(`${credentials.emailAddress}:${credentials.password}`);
       options.headers['Authorization'] = `Basic ${encodedCredentials}`;
@@ -31,7 +32,7 @@ export default class Data {
     const response = await this.api('/users', 'POST', user);
 
     if (response.status === 201) return;
-    if (response.status === 400) return response.json().then(errors => errors);
+    if (response.status === 400) return response.json().then(errors => errors); // return validation errors
     throw new Error('Something went wrong with the server');
   }
 
@@ -55,17 +56,15 @@ export default class Data {
     const response = await this.api('/courses', 'POST', course, true, currentUser);
 
     if (response.status === 201) return;
-    if (response.status === 400) return response.json().then(errors => errors);
+    if (response.status === 400) return response.json().then(errors => errors); // return validation errors
     throw new Error('Something went wrong with the server');
   }
 
   async updateCourse(course, currentUser) {
-    const response = await this.api(`/courses/${course.id}`, 'PUT', course, true, currentUser);
-    return response;
+    return await this.api(`/courses/${course.id}`, 'PUT', course, true, currentUser);
   }
 
   async deleteCourse(id, currentUser) {
-    const response = await this.api(`/courses/${id}`, 'DELETE', null, true, currentUser);
-    return response;
+    return await this.api(`/courses/${id}`, 'DELETE', null, true, currentUser);
   }
 }

@@ -9,6 +9,7 @@ const Header = ({ context: { currentUser } }) => (
       </h1>
       <nav>
         <ul className={`header--${currentUser ? 'signedin' : 'signedout'}`}>
+          {/* render nav links based on user context */}
           {currentUser ? (
             <li>{`Welcome, ${currentUser.firstName} ${currentUser.lastName}!`}</li>
           ) : (

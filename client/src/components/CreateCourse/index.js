@@ -19,10 +19,10 @@ const CreateCourse = ({ context }) => {
 
     await data
       .createCourse(course, currentUser)
-      .then(errors => (errors ? setErrors(errors) : navigate('/')))
+      .then(errors => (errors ? setErrors(errors) : navigate('/'))) // if errors set state otherwise navigate to root
       .catch(err => {
-        navigate('/error');
         console.error('Error creating course: ', err);
+        navigate('/error');
       });
   };
 
@@ -31,7 +31,7 @@ const CreateCourse = ({ context }) => {
       <div className="wrap">
         <h2>Create Course</h2>
 
-        {errors && (
+        {errors && ( // if validation errors render
           <div className="validation--errors">
             <h3>Validation Errors</h3>
             <ul>

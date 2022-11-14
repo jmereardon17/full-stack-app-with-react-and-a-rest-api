@@ -11,17 +11,23 @@ const UserSignIn = ({ context }) => {
 
     const emailAddress = document.getElementById('emailAddress').value;
     const password = document.getElementById('password').value;
-    const prevLocation = location.state?.from || '/';
+    const prevLocation = location.state?.from || '/'; // get the previous location if exists or root
 
-    context.actions
-      .signIn(emailAddress, password)
-      .then(user =>
-        user ? navigate(prevLocation, { replace: true }) : setErrors(['Sign-in was unsuccessful'])
-      )
-      .catch(err => {
-        console.error('Error occurred signing in: ', err);
-        navigate('/error');
-      });
+    if (emailAddress && password) {
+      context.actions
+        .signIn(emailAddress, password)
+        .then(user =>
+          user // user object returned from response
+            ? navigate(prevLocation, { replace: true })
+            : setErrors(['Email address and or password is incorrect'])
+        )
+        .catch(err => {
+          console.error('Error occurred signing in: ', err);
+          navigate('/error');
+        });
+    } else {
+      setErrors(['Please enter an email address and password']); // set validation error for empty form values
+    }
   };
 
   return (
@@ -29,7 +35,7 @@ const UserSignIn = ({ context }) => {
       <div className="form--centered">
         <h2>Sign In</h2>
 
-        {errors && (
+        {errors && ( // if validation errors render
           <div className="validation--errors">
             <ul>
               {errors.map((error, index) => (
