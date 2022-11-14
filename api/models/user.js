@@ -6,61 +6,70 @@ const bcryptjs = require('bcryptjs');
 module.exports = sequelize => {
   class User extends Sequelize.Model {}
 
-  User.init({
-    firstName: {
-      type: Sequelize.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: {
-          msg: 'First name is required'
-        }
-      }
-    },
-    lastName: {
-      type: Sequelize.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: {
-          msg: 'Last name is required'
-        }
-      }
-    },
-    emailAddress: {
-      type: Sequelize.STRING,
-      allowNull: false,
-      unique: {
-        msg: 'The email address you entered already exists',
-      },
-      validate: {
-        notEmpty: 'Email address is required',
-        isEmail: {
-          msg: 'Email address must be valid'
-        }
-      }
-    },
-    password: {
-      type: Sequelize.STRING,
-      allowNull: false,
-      set(val) {
-        if (val) {
-          this.setDataValue('password', bcryptjs.hashSync(val, 10));
+  User.init(
+    {
+      firstName: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: 'First name is required'
+          }
         }
       },
-      validate: {
-        notEmpty: 'Password is required'
-      }
-    },
-  }, 
-  {
-    scopes: {
-      existingUser: {
-        attributes: {
-          exclude: ['password', 'createdAt', 'updatedAt']
+      lastName: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: 'Last name is required'
+          }
+        }
+      },
+      emailAddress: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: {
+          msg: 'The email address you entered already exists'
+        },
+        validate: {
+          notEmpty: {
+            msg: 'Email address is required'
+          },
+          isEmail: {
+            msg: 'Email address must be valid'
+          }
+        }
+      },
+      password: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        set(val) {
+          if (val) {
+            this.setDataValue('password', bcryptjs.hashSync(val, 10));
+          }
+        },
+        validate: {
+          notNull: {
+            msg: 'Password is required'
+          },
+          notEmpty: {
+            msg: 'Password is required'
+          }
         }
       }
     },
-    sequelize 
-  });
+    {
+      scopes: {
+        existingUser: {
+          attributes: {
+            exclude: ['password', 'createdAt', 'updatedAt']
+          }
+        }
+      },
+      sequelize
+    }
+  );
 
   User.associate = models => {
     User.hasMany(models.Course, {
@@ -70,7 +79,7 @@ module.exports = sequelize => {
         allowNull: false
       }
     });
-  }
+  };
 
   return User;
 };
