@@ -1,20 +1,13 @@
 import {
-  withContext,
-  Courses,
-  CourseDetail,
-  UserSignIn,
-  UserSignUp,
-  UserSignOut,
+  UserSignUpWithContext,
+  UserSignInWithContext,
+  UserSignOutWithContext,
+  CoursesWithContext,
+  CourseDetailWithContext,
   NotFound,
   Forbidden,
   UnhandledError
 } from './components';
-
-const UserSignUpWithContext = withContext(UserSignUp);
-const UserSignInWithContext = withContext(UserSignIn);
-const UserSignOutWithContext = withContext(UserSignOut);
-const CoursesWithContext = withContext(Courses);
-const CourseDetailWithContext = withContext(CourseDetail);
 
 const routes = [
   {
