@@ -20,4 +20,4 @@ To further develop the project to recieve an Exceeds Expectations grading, I had
 - Persist user credentials - Using an HTTP cookie so that the user's authenticated state is maintained even if the application is reloaded or loaded into a new browser tab.
 - Redirect the user after successfully signing in - Redirect the user's to the previous screen (whatever that happens to be).
 
-Grade: TBC
+Grade: Exceeds Expectations
